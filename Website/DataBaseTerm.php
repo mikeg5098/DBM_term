@@ -1,7 +1,29 @@
-
-
-
 <!DOCTYPE html>
+
+<html style="background-color: #e8e8e8">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+    <head>
+        <title>DriverSide</title>
+        <link rel="stylesheet" href="style.css" type="text/css" />
+    </head>
+    
+    
+    <div id="header">
+        <div class="container">
+            <ul id="header-nav">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="portfolio.html">DATABASE</a></li>
+                <li><a href="resume.html">TEAM</a></li>
+            </ul>
+            <div id="boxnav"></div>
+        
+        
+        </div>
+    
+    
+    </div>
+
+
 
 <body>
   <br /><br /><br />
