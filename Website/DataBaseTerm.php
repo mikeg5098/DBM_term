@@ -12,8 +12,8 @@
         <div class="container">
             <ul id="header-nav">
                 <li><a href="index.html">HOME</a></li>
-                <li><a href="portfolio.html">DATABASE</a></li>
-                <li><a href="resume.html">TEAM</a></li>
+                <li><a href="DataBaseTerm.php">DATABASE</a></li>
+                <li><a href="team.html">TEAM</a></li>
             </ul>
             <div id="boxnav"></div>
         
@@ -23,10 +23,9 @@
     
     </div>
 
-
-
 <body>
-  <br /><br /><br />
+ <!-- <br /><br /><br /> -->
+<div id="container">
 <!--Input section-->
 <div style="display:inline-block; outline-color:black; border:medium solid">
 <form id="add-cars" method="POST" action="DataBaseTerm.php" >
@@ -67,6 +66,8 @@
           <input type="submit" name="update_car" value="Update">
   </form>
 </div>
+    
+
 <form name="myform" action="" method="GET">
   <input type="text" name="inputbox" value="" />
   <input type="button" name="button" value="Search By Make" onclick="searchTable(this.form)">
@@ -74,6 +75,9 @@
 <br />
 <button onclick="displayTable()" style="float:none;">Display the table</button>
 
+    
+    </div>    
+    
 <!-- Can't move this into external file. Ajax call and defining. -->
 <script>
 function displayTable(){
@@ -198,9 +202,10 @@ if (!$er) {
         <div id="databaseout">
 
         </div>
-        <div id="test">
+       <div id="test">
 
-        </div>
     </form>
+    </div>
   </body>
+
 </html>

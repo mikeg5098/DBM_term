@@ -67,8 +67,9 @@
 .page{
     position: relative;
     top: -190px;
-    max-width: 1100px;
-    height: 800px;
+    max-width: 1000px;
+    min-width: 600px;
+    //height: 100%;
     background-color: white;
     box-shadow: 0px 6px 29px -5px;
     margin: 0 auto;
@@ -76,7 +77,6 @@
 }
 
 #stylebar{
-    position: relative;
     height: 12px;
     background-color: #56bdef;
 }
@@ -135,6 +135,6 @@
 #car
 {
     width:100%;
-    position: relative;
-    top:100px;
+    //position: inherit;
+    top: 100px;
 }
