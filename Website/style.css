@@ -135,6 +135,6 @@
 #car
 {
     width:100%;
-    //position: inherit;
-    top: 100px;
+    position: inherit;
+    padding-top: 150px;
 }
