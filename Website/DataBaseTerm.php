@@ -37,6 +37,10 @@ $faq = $db_handle->runQuery($sql);
 		   });
 		}
 		
+		function viewComments(id) {
+			alert("The id you sent was car_id: " + id);
+		}
+		
 		function insertRecord(){
 		var make = document.getElementById("inputmake").value;
 		var model = document.getElementById("inputmodel").value;
