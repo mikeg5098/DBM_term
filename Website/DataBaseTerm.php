@@ -86,8 +86,6 @@
   <input type="button" name="button" value="Search By Make" onclick="searchTable(this.form)">
 </form>
 <br />
-<button onclick="displayTable()" style="float:none;">Display the table</button>
-
     
     </div>    
     
@@ -120,7 +118,7 @@ function searchTable(form){
   //document.getElementById['test'].innerHTML = "\"" + "databasesearch.php?make=" + maketosearch + "\"";
 
 
-    displayTable();
+    //displayTable();
 </script>
 
 <?php
@@ -213,7 +211,53 @@ if (!$er) {
 ?>
         </p>
         <div id="databaseout">
-
+		
+		<?php
+require_once("dbcontroller.php");
+$db_handle = new DBController();
+$sql = "SELECT * from database_testing";
+$faq = $db_handle->runQuery($sql);
+?>	
+	<script>
+		function showEdit(editableObj) {
+			$(editableObj).css("background","#FFF");
+		} 
+		
+		function saveToDatabase(editableObj,column,id) {
+			$(editableObj).css("background","#FFF url(loaderIcon.gif) no-repeat right");
+			$.ajax({
+				url: "saveedit.php",
+				type: "POST",
+				data:'column='+column+'&editval='+editableObj.innerHTML+'&car_id='+id,
+				success: function(data){
+					$(editableObj).css("background","#FDFDFD");
+				}        
+		   });
+		}
+	</script>		
+	   <table class="table table-hover">
+		  <thead>
+			  <tr>
+				<th>Model</th>
+				<th>Make</th>
+				<th>Year</th>
+			  </tr>
+		  </thead>
+		  <tbody>
+		  <?php
+		  foreach($faq as $k=>$v) {
+		  ?>
+			  <tr>
+				<td contenteditable="true" onBlur="saveToDatabase(this,'Make','<?php echo $faq[$k]["car_id"]; ?>')" onClick="showEdit(this);"><?php echo $faq[$k]["Make"]; ?></td>
+				<td contenteditable="true" onBlur="saveToDatabase(this,'Model','<?php echo $faq[$k]["car_id"]; ?>')" onClick="showEdit(this);"><?php echo $faq[$k]["Model"]; ?></td>
+				<td contenteditable="true" onBlur="saveToDatabase(this,'Year','<?php echo $faq[$k]["car_id"]; ?>')" onClick="showEdit(this);"><?php echo $faq[$k]["Year"]; ?></td>
+			  </tr>
+		<?php
+		}
+		?>
+		  </tbody>
+		</table>
+		
         </div>
        <div id="test">
 
