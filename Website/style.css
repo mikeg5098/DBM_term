@@ -138,3 +138,9 @@
     position: inherit;
     padding-top: 150px;
 }
+
+.searchparam{
+	text-align:center;
+	color:red;
+	font-size: 16px;
+}
