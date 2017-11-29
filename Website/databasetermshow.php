@@ -30,7 +30,7 @@ if (!$er) {
 
     // Produce the column labels
     $keys = array_keys($row);
-    for ($index = 0; $index < $num_fields; $index++)
+    for ($index = 0; $index < $num_fields-1; $index++)
         print "<th class=\"labels\" >" . $keys[2 * $index + 1] . "</th>";
 
     // Output the values of the fields in the rows
@@ -39,7 +39,7 @@ if (!$er) {
         $values = array_values($row);
         $value = htmlspecialchars($values[1]);
         print "<th contenteditable=\"true\">" . $value;
-        for ($index = 1; $index < $num_fields; $index++){
+        for ($index = 1; $index < $num_fields-1; $index++){
             $value = htmlspecialchars($values[2 * $index + 1]);
             print "<th contenteditable=\"true\">" . $value;
 
