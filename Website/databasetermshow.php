@@ -22,7 +22,7 @@ if (!$er) {
     $num_rows = "";
     $num_rows = mysqli_num_rows($result);
 
-    print "<table class=\"table table-hover\"><caption> <h2> Makes/Models/Year ($num_rows) </h2> </caption>";
+    print "<table class=\"table table-hover\">";
     print "<tr align = 'center'>";
 
     $row = mysqli_fetch_array($result);
