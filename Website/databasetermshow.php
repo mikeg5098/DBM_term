@@ -11,7 +11,7 @@ if (!$er) {
     print "Error - Could not select the database";
     exit;
 }
-  $query = "SELECT * FROM Database_test";
+  $query = "SELECT * FROM database_testing";
   $result = mysqli_query($db,$query);
   if (!$result) {
       print "Error - the query could not be executed";
@@ -22,7 +22,7 @@ if (!$er) {
     $num_rows = "";
     $num_rows = mysqli_num_rows($result);
 
-    print "<table><caption> <h2> Makes/Models/Year ($num_rows) </h2> </caption>";
+    print "<table class=\"table table-hover\"><caption> <h2> Makes/Models/Year ($num_rows) </h2> </caption>";
     print "<tr align = 'center'>";
 
     $row = mysqli_fetch_array($result);
@@ -38,10 +38,10 @@ if (!$er) {
         print "<tr align = 'center'>";
         $values = array_values($row);
         $value = htmlspecialchars($values[1]);
-        print "<th>" . $value;
+        print "<th contenteditable=\"true\">" . $value;
         for ($index = 1; $index < $num_fields; $index++){
             $value = htmlspecialchars($values[2 * $index + 1]);
-            print "<th>" . $value;
+            print "<th contenteditable=\"true\">" . $value;
 
         }
         $row = mysqli_fetch_array($result);
