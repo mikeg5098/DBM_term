@@ -138,3 +138,51 @@
     position: relative;
     top:100px;
 }
+
+#trois_cercle
+{
+    padding-top: 50px;
+    
+}
+.team
+{
+    display: inline-block;
+    max-width: 330px;
+}
+.team img
+{
+    align-self: center;
+}
+
+#team_wild
+{
+    font-size: 60px;
+    font-weight: 200;
+    font-family: "Lato";
+    text-align: center;
+    color: #56bdef;
+    position: relative;
+    top: 50px;
+    width:70%;
+    margin: 0 auto;
+}
+
+.page h2
+{
+    font-size: 30px;
+    font-weight: 400;
+    font-family: "Lato";
+    color: #383838;
+    position: relative;
+    text-align: center;
+    margin: 0 auto;
+}
+.team p
+{
+    font-size: 20px;
+    font-weight: 300;
+    font-family: "Lato";
+    text-align: left;
+    color: #2d2d2d;
+    top:-50px;
+}
