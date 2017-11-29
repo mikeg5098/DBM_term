@@ -1,52 +1,54 @@
 <?php
-$make = $_GET["make"];
-$db = mysqli_connect("db1.cs.uakron.edu:3306", "jsy15", "termProjJacob17");
-if (!$db) {
-     print "Error - Could not connect to MySQL";
-     exit;
-}
-
-// Select the database
-$er = mysqli_select_db($db,"ISP_jsy15");
-if (!$er) {
-    print "Error - Could not select the database";
-    exit;
-}
-  $query = "SELECT * FROM Database_test WHERE Make='$make';";
-  $result = mysqli_query($db,$query);
-  if (!$result) {
-      print "Error - the query could not be executed";
-      $error = mysqli_error();
-      print "<p>" . $error . "</p>";
-      exit;
-    }
-    $num_rows = "";
-    $num_rows = mysqli_num_rows($result);
-
-    print "<table><caption> <h2> Makes/Models/Year ($num_rows) </h2> </caption>";
-    print "<tr align = 'center'>";
-
-    $row = mysqli_fetch_array($result);
-    $num_fields = mysqli_num_fields($result);
-
-    // Produce the column labels
-    $keys = array_keys($row);
-    for ($index = 0; $index < $num_fields; $index++)
-        print "<th class=\"labels\"> <h3>" . $keys[2 * $index + 1] . "</h3></th>";
-
-    // Output the values of the fields in the rows
-    for ($row_num = 0; $row_num < $num_rows; $row_num++) {
-        print "<tr align = 'center'>";
-        $values = array_values($row);
-        $value = htmlspecialchars($values[1]);
-        print "<th>" . $value;
-        for ($index = 1; $index < $num_fields; $index++){
-            $value = htmlspecialchars($values[2 * $index + 1]);
-            print "<th>" . $value;
-
-        }
-        $row = mysqli_fetch_array($result);
-        $store = "";
-    }
-    print "</table>";
-    ?>
+error_reporting(E_ERROR);
+require_once("dbcontroller.php");
+$db_handle = new DBController();
+$search = $_GET["search"];
+$sql = "SELECT * FROM database_testing WHERE model LIKE '%" . $search . "%' OR make LIKE '%" . $search . "%' OR year LIKE '%" . $search . "%';";
+$faq = $db_handle->runQuery($sql);
+?>
+<html>
+    <head>
+		<script>
+		function showEdit(editableObj) {
+			$(editableObj).css("background","#FFF");
+		} 
+		
+		function saveToDatabase(editableObj,column,id) {
+			$(editableObj).css("background","#FFF url(loaderIcon.gif) no-repeat right");
+			$.ajax({
+				url: "saveedit.php",
+				type: "POST",
+				data:'column='+column+'&editval='+editableObj.innerHTML+'&car_id='+id,
+				success: function(data){
+					$(editableObj).css("background","#FDFDFD");
+				}        
+		   });
+		}
+		</script>
+    </head>
+    <body>		
+	   <table class="table table-hover">
+		  <thead>
+			  <tr>
+				<th>Model</th>
+				<th>Make</th>
+				<th>Year</th>
+			  </tr>
+		  </thead>
+		  <tbody>
+		  <?php
+		  foreach($faq as $k=>$v) {
+		  ?>
+			  <tr>
+				<td  contenteditable="true" onBlur="saveToDatabase(this,'Model','<?php echo $faq[$k]["car_id"]; ?>')" onClick="showEdit(this);"><?php echo $faq[$k]["Model"]; ?></td>
+				<td contenteditable="true" onBlur="saveToDatabase(this,'Make','<?php echo $faq[$k]["car_id"]; ?>')" onClick="showEdit(this);"><?php echo $faq[$k]["Make"]; ?></td>
+				<td contenteditable="true" onBlur="saveToDatabase(this,'Year','<?php echo $faq[$k]["car_id"]; ?>')" onClick="showEdit(this);"><?php echo $faq[$k]["Year"]; ?></td>
+				<td> <button onclick="deleteRecord(<?php echo $faq[$k]["car_id"]; ?>)">Delete</button> </td>
+			  </tr>
+		<?php
+		}
+		?>
+		  </tbody>
+		</table>
+    </body>
+</html>
