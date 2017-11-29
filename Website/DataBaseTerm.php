@@ -120,7 +120,7 @@ function searchTable(form){
   //document.getElementById['test'].innerHTML = "\"" + "databasesearch.php?make=" + maketosearch + "\"";
 
 
-    //displayTable();
+    displayTable();
 </script>
 
 <?php
