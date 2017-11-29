@@ -59,28 +59,7 @@
         <input type="submit" name="remove_car" value="Delete">
 </form>
 </div>
-<div style="display:inline-block; outline-color:black; border:medium solid">
-  <p>
-    Update Cars
-  </p>
-  <form id="add-grades" method="POST" action="DataBaseTerm.php">
-          <input type="text" name="modelu">Model<br>
-          <input type="text" name="makeu">Make<br>
-          <input type="text" name="yearu">Year<br>
-          <select class="myButton" name= "choice" form="add-grades">
-            <option value="Model">Model</option>
-            <option value="Make">Make</option>
-            <option value="year">Year</option>
-          </select> =
-          Choice<br>
-          <input type="text" name="modelUpdate">New Model<br>
-          <input type="text" name="makeUpdate">New Make<br>
-          <input type="text" name="yearUpdate">New Year<br>
-          <input type="submit" name="update_car" value="Update">
-  </form>
-</div>
     
-
 <form name="myform" action="" method="GET">
   <input type="text" name="inputbox" value="" />
   <input type="button" name="button" value="Search By Make" onclick="searchTable(this.form)">
