@@ -1,7 +1,7 @@
 <?php
 require_once("dbcontroller.php");
 $db_handle = new DBController();
-$sql = "SELECT * from database_testing";
+$sql = "SELECT * from database_testing ORDER BY Model";
 $faq = $db_handle->runQuery($sql);
 ?>
 <html>
@@ -12,6 +12,7 @@ $faq = $db_handle->runQuery($sql);
 		} 
 		
 		function saveToDatabase(editableObj,column,id) {
+		//alert("I sent the values: " + column + ", " + id + ", " +editableObj.innerHTML);
 			$(editableObj).css("background","#FFF url(loaderIcon.gif) no-repeat right");
 			$.ajax({
 				url: "saveedit.php",
