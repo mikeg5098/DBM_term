@@ -11,24 +11,20 @@ else
 $username=$_POST['username'];
 $password=$_POST['password'];
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-$connection = mysql_connect("localhost", "root", "");
-// To protect MySQL injection for Security purpose
-$username = stripslashes($username);
-$password = stripslashes($password);
-$username = mysql_real_escape_string($username);
-$password = mysql_real_escape_string($password);
+$connection = mysqli_connect("db1.cs.uakron.edu:3306", "jsy15", "termProjJacob17");
+
 // Selecting Database
-$db = mysql_select_db("company", $connection);
+$db = mysqli_select_db($connection,"ISP_jsy15");
 // SQL query to fetch information of registerd users and finds user match.
-$query = mysql_query("select * from login where password='$password' AND username='$username'", $connection);
-$rows = mysql_num_rows($query);
+$query = mysqli_query($connection, "select * from login where password='$password' AND username='$username'");
+$rows = mysqli_num_rows($query);
 if ($rows == 1) {
 $_SESSION['login_user']=$username; // Initializing Session
 header("location: profile.php"); // Redirecting To Other Page
 } else {
 $error = "Username or Password is invalid";
 }
-mysql_close($connection); // Closing Connection
+mysqli_close($connection); // Closing Connection
 }
 }
 
@@ -43,12 +39,12 @@ else
 	$fname=$_POST['fname'];
 	$lname=$_POST['lname'];	
 
-	$connection = mysql_connect("localhost", "root", "");
-	$db = mysql_select_db("company", $connection);
+	$connection = mysqli_connect("db1.cs.uakron.edu:3306", "jsy15", "termProjJacob17");
+	$db = mysqli_select_db($connection,"ISP_jsy15");
 
-	$query = mysql_query("INSERT INTO `login`(`id`, `username`, `password`, `fname`, `lname`) VALUES ('','$username','$password','$fname','$lname')", $connection);
+	$query = mysqli_query($connection, "INSERT INTO `login`(`id`, `username`, `password`, `fname`, `lname`) VALUES ('','$username','$password','$fname','$lname')");
 	header("location: profile.php");
-	mysql_close($connection);
+	mysqli_close($connection);
 }
 }
 
