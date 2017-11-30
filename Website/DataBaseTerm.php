@@ -127,6 +127,7 @@ $faq = $db_handle->runQuery($sql);
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="DataBaseTerm.php">DATABASE</a></li>
                 <li><a href="team.html">TEAM</a></li>
+                <li><a href="login_index.php">LOGIN</a></li>
             </ul>
             <div id="boxnav"></div>
         

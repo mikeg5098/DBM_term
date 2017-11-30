@@ -47,6 +47,7 @@
 {
     padding-left: 50px;
     padding-right: 50px;
+    padding-bottom: 100px;
     
 }
 
@@ -200,5 +201,39 @@
     bottom: 0; 
     width: 100%;
     height: 40px;
+    background-color: #56bdef;
+}
+
+.login
+{
+    display: inline-block;
+    width: 45%;
+    
+}
+
+#login_area
+{
+    position: relative;
+    top: 50px;
+}
+.login h1
+{
+    top: -10px; 
+}
+.login form
+{
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+.login form label
+{
+    font-size: 15px;
+    font-weight: 200;
+    font-family: "Lato";
+}
+.sep_bar
+{
+    width: 100%;
+    height: 5px;
     background-color: #56bdef;
 }
