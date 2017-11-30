@@ -38,7 +38,7 @@ $faq = $db_handle->runQuery($sql);
 		}
 		
 		function viewComments(id) {
-			alert("The id you sent was car_id: " + id);
+			//alert("The id you sent was car_id: " + id);
 		}
 		
 		function insertRecord(){
@@ -67,6 +67,33 @@ $faq = $db_handle->runQuery($sql);
 			document.getElementById("inputmodel").value = "";
 			document.getElementById("inputyear").value = "";
 			document.getElementById("inputmake").value = "";
+		}
+
+		function insertRating(){
+			var test1 = document.querySelector('input[name="rating"]:checked').value;
+			var car_id = document.getElementById("rating_car_id").value;
+
+			//alert("Test:" + test1 + ", " + car_id);
+
+			$.ajax({
+				url: "insertrating.php",
+				type: "POST",
+				data:'car_id='+car_id+'&rating='+test1,
+				success: function(data){
+				displayTable();
+				var ele = document.getElementsByName("rating");
+				for(var i=0;i<ele.length;i++)
+					ele[i].checked = false;
+				displayTable();
+				}        
+		   });
+
+			
+		}
+
+		function setRatingID(car_id){
+			//alert("Test1: " + car_id);
+			document.getElementById("rating_car_id").value = car_id;
 		}
 		
 	</script>
@@ -122,6 +149,8 @@ $faq = $db_handle->runQuery($sql);
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalNorm" style="display:inline;">
     Insert Car
 </button> 
+
+ 
 </div>
  
     </div>    
@@ -131,10 +160,13 @@ $faq = $db_handle->runQuery($sql);
 <!-- Can't move this into external file. Ajax call and defining. -->
 <script>
 function displayTable(){
+//alert("hello");
+//document.getElementById('loadingicon').style.display = "none";
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
     document.getElementById('databaseout').innerHTML = this.responseText;
+	document.getElementById("seaarchparam").innerHTML = "";
   }
   }
   xmlhttp.open("GET","databasetermshow.php",true);
@@ -296,6 +328,45 @@ if (!$er) {
                   </div>
 				  <button type="submit" class="btn btn-default"
                    data-dismiss="modal" onclick="insertRecord()">
+                       <span aria-hidden="true">Submit</span>
+                       <span class="sr-only">Submit</span>
+                </button>
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="ModalRating" tabindex="-1" role="dialog" 
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" 
+                   data-dismiss="modal" onclick="clearinput()">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Insert Car Information
+                </h4>
+            </div>
+            
+            <!-- Modal Body -->
+            <div class="modal-body">
+                  <div class="form-group">
+                    <label for="inputModel">Would you reccomend this car?</label>
+                      <input type="radio" 
+                      id="inputrating" name="rating" value="1"/> Yes
+					  <input type="radio"
+                      id="inputrating" name="rating" value="-1"/> No
+					  <br>
+					  <input type="text" style="display:none;" id="rating_car_id">
+                  </div>
+				  <button type="submit" class="btn btn-default"
+                   data-dismiss="modal" onclick="insertRating()">
                        <span aria-hidden="true">Submit</span>
                        <span class="sr-only">Submit</span>
                 </button>
