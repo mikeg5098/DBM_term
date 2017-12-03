@@ -237,3 +237,8 @@
     height: 5px;
     background-color: #56bdef;
 }
+
+.ratingfield{
+	width: 200px !important;
+	height: 300px !important;
+}

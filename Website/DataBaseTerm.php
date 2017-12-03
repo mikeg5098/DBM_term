@@ -14,6 +14,7 @@ $faq = $db_handle->runQuery($sql);
 		} 
 		
 		function saveToDatabase(editableObj,column,id) {
+		alert("Passing: " + column + " , " + editableObj.innerHTML + " , " + id);
 			$(editableObj).css("background","#FFF url(loaderIcon.gif) no-repeat right");
 			$.ajax({
 				url: "saveedit.php",
@@ -132,7 +133,8 @@ $faq = $db_handle->runQuery($sql);
                 <li><a href="team.html">TEAM</a></li>
                 <li><a href="login_index.php">LOGIN</a></li>
             </ul>
-            <div id="boxnav" style="float:right; color:white;">Welcome: <?php echo $fname_session; ?> &nbsp;&nbsp; <b id="logout"><a href="logout.php">Log Out</a></b></div>
+            <div id="boxnav"></div>
+			<div style="float:right; color:white;">Welcome: <?php echo $fname_session; ?> &nbsp;&nbsp; <b id="logout"><a href="logout.php">Log Out</a></b>
         
         
         </div>
@@ -391,7 +393,7 @@ if (!$er) {
 					  <input type="radio"
                       id="inputrating" name="rating" value="-1"/> No
 					  <br>
-					  <input type="text" id="rating_comment">
+					  <textarea rows="4" cols="50" id="rating_comment" placeholder="Place any comments here"></textarea>
 					  <input type="text" style="display:none;" id="rating_car_id">
                   </div>
 				  <button type="submit" class="btn btn-default"

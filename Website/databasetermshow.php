@@ -1,7 +1,7 @@
 <?php
 require_once("dbcontroller.php");
 $db_handle = new DBController();
-$sql = "SELECT database_testing.car_id, Model, Make, Year, rating_car FROM database_testing join (SELECT car_id, SUM(rating) as rating_car FROM DBM_ratings GROUP BY car_id) AS rating_table WHERE database_testing.car_id = rating_table.car_id ORDER BY model";
+$sql = "call getAll();";
 $faq = $db_handle->runQuery($sql);
 ?>
 <html>

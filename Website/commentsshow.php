@@ -3,7 +3,7 @@ require_once("dbcontroller.php");
 $db_handle = new DBController();
 
 $comment = $_GET["search"];
-$sql = "SELECT comment, rating, make, model, DBM_ratings.car_id FROM DBM_ratings join database_testing WHERE DBM_ratings.car_id = database_testing.car_id AND rating != '0' AND DBM_ratings.car_id = '" . $comment . "'";
+$sql = "call getComments('" . $comment . "');";
 $faq = $db_handle->runQuery($sql);
 if(!$faq){
 	print "No comments or ratings were found. &nbsp;&nbsp;&nbsp;";
