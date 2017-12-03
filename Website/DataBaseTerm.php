@@ -14,7 +14,7 @@ $faq = $db_handle->runQuery($sql);
 		} 
 		
 		function saveToDatabase(editableObj,column,id) {
-		alert("Passing: " + column + " , " + editableObj.innerHTML + " , " + id);
+		
 			$(editableObj).css("background","#FFF url(loaderIcon.gif) no-repeat right");
 			$.ajax({
 				url: "saveedit.php",
