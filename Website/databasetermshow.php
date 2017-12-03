@@ -28,7 +28,7 @@ $faq = $db_handle->runQuery($sql);
 	   <table class="table table-hover">
 		  <thead>
 			  <tr>
-				<th>Model</th>
+				<th style="text-align:center;">Model</th>
 				<th>Make</th>
 				<th>Year</th>
 				<th>Rating</th>
@@ -39,13 +39,13 @@ $faq = $db_handle->runQuery($sql);
 		  foreach($faq as $k=>$v) {
 		  ?>
 			  <tr>
-				<td  contenteditable="true" onBlur="saveToDatabase(this,'Model','<?php echo $faq[$k]["car_id"]; ?>')" onClick="showEdit(this);"><?php echo $faq[$k]["Model"]; ?></td>
+				<td style="text-align:center;" contenteditable="true" onBlur="saveToDatabase(this,'Model','<?php echo $faq[$k]["car_id"]; ?>')" onClick="showEdit(this);"><?php echo $faq[$k]["Model"]; ?></td>
 				<td contenteditable="true" onBlur="saveToDatabase(this,'Make','<?php echo $faq[$k]["car_id"]; ?>')" onClick="showEdit(this);"><?php echo $faq[$k]["Make"]; ?></td>
 				<td contenteditable="true" onBlur="saveToDatabase(this,'Year','<?php echo $faq[$k]["car_id"]; ?>')" onClick="showEdit(this);"><?php echo $faq[$k]["Year"]; ?></td>
 				<td>
 					<?php echo $faq[$k]["rating_car"]; ?>
 				</td>
-				<td> <button onclick="deleteRecord(<?php echo $faq[$k]["car_id"]; ?>)">Delete</button>  <button onclick="setRatingID(<?php echo $faq[$k]["car_id"]; ?>)" data-toggle="modal" data-target="#ModalRating" >Insert Rating</button></td>
+				<td> <button onclick="deleteRecord(<?php echo $faq[$k]["car_id"]; ?>)">Delete</button>  <button onclick="setRatingID(<?php echo $faq[$k]["car_id"]; ?>)" data-toggle="modal" data-target="#ModalRating" >Insert Rating</button> <button onclick="viewComments(<?php echo $faq[$k]["car_id"]; ?>)" >See Comments</button></td>
 			  </tr>
 		<?php
 		}

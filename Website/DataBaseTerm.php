@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php
+include('session.php');
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 $sql = "SELECT * from database_testing";
@@ -37,9 +38,8 @@ $faq = $db_handle->runQuery($sql);
 		   });
 		}
 		
-		function viewComments(id) {
-			//alert("The id you sent was car_id: " + id);
-		}
+		
+		
 		
 		function insertRecord(){
 		var make = document.getElementById("inputmake").value;
@@ -72,13 +72,16 @@ $faq = $db_handle->runQuery($sql);
 		function insertRating(){
 			var test1 = document.querySelector('input[name="rating"]:checked').value;
 			var car_id = document.getElementById("rating_car_id").value;
+			var rating_comment = document.getElementById("rating_comment").value;
+			//alert("hellO: " + rating_comment);
+			document.getElementById("rating_comment").value = "";
 
 			//alert("Test:" + test1 + ", " + car_id);
 
 			$.ajax({
 				url: "insertrating.php",
 				type: "POST",
-				data:'car_id='+car_id+'&rating='+test1,
+				data:'car_id='+car_id+'&rating='+test1+'&comment='+rating_comment,
 				success: function(data){
 				displayTable();
 				var ele = document.getElementsByName("rating");
@@ -129,7 +132,7 @@ $faq = $db_handle->runQuery($sql);
                 <li><a href="team.html">TEAM</a></li>
                 <li><a href="login_index.php">LOGIN</a></li>
             </ul>
-            <div id="boxnav"></div>
+            <div id="boxnav" style="float:right; color:white;">Welcome: <?php echo $login_session; ?></div>
         
         
         </div>
@@ -139,17 +142,24 @@ $faq = $db_handle->runQuery($sql);
 
 <body>
  <!-- <br /><br /><br /> -->
-<div id="container">
+<div id="container" class="container">
 <!--Input section-->
     <br />
 	<div style="text-align:center;">
-<form name="myform" action="" method="GET" style="display:inline;">
-  <input type="text" name="inputbox" id="inputbox" value="" />
-  <input type="button" name="button" value="Search Car Database" onclick="searchTable(this.form)" class="btn btn-primary btn-lg">  
-</form>  
+	
+	
+  <input type="button" name="button" value="Search Car Database" onclick="searchTable()" class="btn btn-primary btn-lg"> 
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalNorm" style="display:inline;">
     Insert Car
 </button> 
+<button class="btn btn-primary btn-lg" onclick="displayTable();">Show All Cars</button>
+
+<br/></br>
+
+<div class="input-group" id="searchbox">
+		<span class="input-group-addon" style="text-align:center;">Search:</span>
+			<input type="text" name="inputbox" id="inputbox" value="" class="form-control"/>
+	</div>
 
  
 </div>
@@ -173,8 +183,13 @@ function displayTable(){
   xmlhttp.open("GET","databasetermshow.php",true);
   xmlhttp.send();
 }
+
+function seeComments(car_id){
+	alert("hello");
+}
+
 function searchTable(form){
-  var maketosearch = form.inputbox.value;
+  var maketosearch = document.getElementById('inputbox').value;
   if(!maketosearch == ""){
     var xmr = new XMLHttpRequest();
     xmr.onreadystatechange = function() {
@@ -193,7 +208,19 @@ function searchTable(form){
   displayTable();
   }  
   }
+  
+  function viewComments(id) {
+			var xmlhttp = new XMLHttpRequest();
+			  xmlhttp.onreadystatechange = function() {
+				if (this.readyState == 4 && this.status == 200) {
+				document.getElementById('databaseout').innerHTML = this.responseText;
+				document.getElementById("seaarchparam").innerHTML = "";
+			  }
+			  }
+			  xmlhttp.open("GET","commentsshow.php?search="+id,true);
+			  xmlhttp.send();
   //document.getElementById['test'].innerHTML = "\"" + "databasesearch.php?make=" + maketosearch + "\"";
+  }
 
 
     displayTable();
@@ -364,6 +391,7 @@ if (!$er) {
 					  <input type="radio"
                       id="inputrating" name="rating" value="-1"/> No
 					  <br>
+					  <input type="text" id="rating_comment">
 					  <input type="text" style="display:none;" id="rating_car_id">
                   </div>
 				  <button type="submit" class="btn btn-default"
@@ -383,5 +411,7 @@ if (!$er) {
        <div id="test">
     </div>
   </body>
+  
+  
 
 </html>

@@ -30,7 +30,7 @@ $faq = $db_handle->runQuery($sql);
 	   <table class="table table-hover">
 		  <thead>
 			  <tr>
-				<th>Model</th>
+				<th style="text-align:center;">Model</th>
 				<th>Make</th>
 				<th>Year</th>
 				<th>Rating</th>
@@ -47,7 +47,7 @@ $faq = $db_handle->runQuery($sql);
 				<td>
 					<?php echo $faq[$k]["rating_car"]; ?>
 				</td>
-				<td> <button onclick="deleteRecord(<?php echo $faq[$k]["car_id"]; ?>)">Delete</button>  <button onclick="setRatingID(<?php echo $faq[$k]["car_id"]; ?>)" data-toggle="modal" data-target="#ModalRating" >Insert Rating</button></td>
+				<td> <button onclick="deleteRecord(<?php echo $faq[$k]["car_id"]; ?>)">Delete</button>  <button onclick="setRatingID(<?php echo $faq[$k]["car_id"]; ?>)" data-toggle="modal" data-target="#ModalRating" >Insert Rating</button> <button onclick="viewComments(<?php echo $faq[$k]["car_id"]; ?>)" >See Comments</button></td>
 			  </tr>
 		<?php
 		}
