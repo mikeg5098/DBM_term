@@ -132,7 +132,7 @@ $faq = $db_handle->runQuery($sql);
                 <li><a href="team.html">TEAM</a></li>
                 <li><a href="login_index.php">LOGIN</a></li>
             </ul>
-            <div id="boxnav" style="float:right; color:white;">Welcome: <?php echo $login_session; ?></div>
+            <div id="boxnav" style="float:right; color:white;">Welcome: <?php echo $fname_session; ?> &nbsp;&nbsp; <b id="logout"><a href="logout.php">Log Out</a></b></div>
         
         
         </div>
