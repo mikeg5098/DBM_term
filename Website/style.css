@@ -242,3 +242,37 @@
 	width: 200px !important;
 	height: 300px !important;
 }
+
+#bound
+{
+    margin: 0 auto;
+}
+
+#profile
+{
+    padding: 200px;
+}
+
+#welcome
+{
+    font-size: 30px;
+    font-weight: 500;
+    font-family: "Lato";
+    text-align: center;
+    color: #56bdef;
+    position: relative;
+    width:70%;
+    margin: 0 auto;
+    
+}
+#logout
+{
+    font-size: 30px;
+    font-weight: 500;
+    font-family: "Lato";
+    text-align: center;
+    color: #56bdef;
+    position: relative;
+    width:70%;
+    margin: 0 auto;
+}
