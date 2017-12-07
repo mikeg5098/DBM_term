@@ -4,7 +4,7 @@ include('session.php');
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 $search = $_GET["search"];
-$sql = "SELECT DISTINCT database_testing.car_id, Model, Make, Year, rating_car FROM database_testing join (SELECT car_id, SUM(rating) as rating_car FROM DBM_ratings GROUP BY car_id) AS rating_table WHERE database_testing.car_id = rating_table.car_id AND model LIKE '%" . $search . "%' OR make LIKE '%" . $search . "%' OR year LIKE '%" . $search . "%' ORDER BY model ;";
+$sql = "SELECT database_testing.car_id, Model, Make, Year, rating_car FROM database_testing join (SELECT car_id, SUM(rating) as rating_car FROM DBM_ratings GROUP BY car_id) AS rating_table WHERE database_testing.car_id = rating_table.car_id AND model LIKE '%" . $search . "%' OR make LIKE '%" . $search . "%' OR year LIKE '%" . $search . "%' GROUP BY database_testing.car_id ORDER BY model ;";
 $faq = $db_handle->runQuery($sql);
 ?>
 <html>
