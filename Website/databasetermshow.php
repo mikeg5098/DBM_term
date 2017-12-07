@@ -7,6 +7,11 @@ $faq = $db_handle->runQuery($sql);
 ?>
 <html>
     <head>
+	<style>
+	th {
+    cursor: pointer;
+	}
+	</style>
 		<script>
 		function showEdit(editableObj) {
 			$(editableObj).css("background","#FFF");
@@ -30,13 +35,13 @@ $faq = $db_handle->runQuery($sql);
 		if($id_session == 1 or $id_session == 2 or $id_session == 3)
 		{ 
 	?>
-	   <table class="table table-hover">
+	   <table id="myTable2" class="table table-hover">
 		  <thead>
 			  <tr>
-				<th style="text-align:center;">Model</th>
-				<th>Make</th>
-				<th>Year</th>
-				<th>Rating</th>
+				<th onClick="sortTable(0)" style="text-align:center;">Model</th>
+				<th onClick="sortTable(1)">Make</th>
+				<th onClick="sortTable(2)">Year</th>
+				<th onClick="sortTable(3)">Rating</th>
 			  </tr>
 		  </thead>
 		  <tbody>
@@ -62,13 +67,13 @@ $faq = $db_handle->runQuery($sql);
 		else
 		{
 			?>
-			<table class="table table-hover">
+			<table id="myTable2" class="table table-hover">
 		  <thead>
 			  <tr>
-				<th style="text-align:center;">Model</th>
-				<th>Make</th>
-				<th>Year</th>
-				<th>Rating</th>
+				<th onClick="sortTable(0)" style="text-align:center;">Model</th>
+				<th onClick="sortTable(1)">Make</th>
+				<th onClick="sortTable(2)">Year</th>
+				<th onClick="sortTable(3)">Rating</th>
 			  </tr>
 		  </thead>
 		  <tbody>
