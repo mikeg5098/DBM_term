@@ -173,6 +173,8 @@ $faq = $db_handle->runQuery($sql);
 <!-- Can't move this into external file. Ajax call and defining. -->
 <script>
 function displayTable(){
+//alert("hello");
+//document.getElementById('loadingicon').style.display = "none";
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -243,7 +245,7 @@ if (!$er) {
 
     //Handle input, if any
   if(!empty($_POST)) {
-    //Add car
+    //Add student
     if(isset($_POST["add_car"])) {
       if(isset($_POST["model"]) && isset($_POST["make"]) && $_POST["year"]){
 

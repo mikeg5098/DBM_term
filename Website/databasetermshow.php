@@ -1,5 +1,4 @@
 <?php
-include('session.php');
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 $sql = "call getAll();";
@@ -25,11 +24,7 @@ $faq = $db_handle->runQuery($sql);
 		}
 		</script>
     </head>
-    <body>	
-	<?php 
-		if($id_session == 1 or $id_session == 2 or $id_session == 3)
-		{ 
-	?>
+    <body>		
 	   <table class="table table-hover">
 		  <thead>
 			  <tr>
@@ -57,40 +52,5 @@ $faq = $db_handle->runQuery($sql);
 		?>
 		  </tbody>
 		</table>
-		<?php
-		}
-		else
-		{
-			?>
-			<table class="table table-hover">
-		  <thead>
-			  <tr>
-				<th style="text-align:center;">Model</th>
-				<th>Make</th>
-				<th>Year</th>
-				<th>Rating</th>
-			  </tr>
-		  </thead>
-		  <tbody>
-		  <?php
-		  foreach($faq as $k=>$v) {
-		  ?>
-			  <tr>
-				<td style="text-align:center;" ><?php echo $faq[$k]["Model"]; ?></td>
-				<td><?php echo $faq[$k]["Make"]; ?></td>
-				<td><?php echo $faq[$k]["Year"]; ?></td>
-				<td>
-					<?php echo $faq[$k]["rating_car"]; ?>
-				</td>
-				<td> <button onclick="setRatingID(<?php echo $faq[$k]["car_id"]; ?>)" data-toggle="modal" data-target="#ModalRating" >Insert Rating</button> <button onclick="viewComments(<?php echo $faq[$k]["car_id"]; ?>)" >See Comments</button></td>
-			  </tr>
-		<?php
-		}
-		?>
-		  </tbody>
-		</table>
-		<?php
-		}
-		?>
     </body>
 </html>
