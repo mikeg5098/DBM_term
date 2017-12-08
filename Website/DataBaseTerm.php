@@ -171,7 +171,7 @@ $faq = $db_handle->runQuery($sql);
                 <li><a href="login_index.php">LOGIN</a></li>
             </ul>
             <div id="boxnav"></div>
-			<div style="float:right; color:white;">Welcome: <?php echo $fname_session; ?> &nbsp;&nbsp; <b id="logout"><a href="logout.php">Log Out</a></b>
+			<div style="float:right; color:white;">Welcome: <a href="recommendedcars.php?id=<?php echo $id_session; ?>"><?php echo $fname_session; ?></a> &nbsp;&nbsp; <b id="logout"><a href="logout.php">Log Out</a></b>
 
 
         </div>
