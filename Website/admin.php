@@ -134,6 +134,17 @@ $faq = $db_handle->runQuery($sql);
 			advoperator1.selectedIndex = 0;
 		}
 
+		function deleteRating(id){
+			$.ajax({
+				url: "deleterating.php",
+				type: "POST",
+				data:'rating_id='+id,
+				success: function(data){
+				getUsers();
+				}
+		   });
+		}
+
 	</script>
 
 

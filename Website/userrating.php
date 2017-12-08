@@ -4,7 +4,7 @@ include('session.php');
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 $search = $_GET["search"];
-$sql = "SELECT rating, comment, make, model, year FROM DBM_ratings join database_testing WHERE database_testing.car_id = DBM_ratings.car_id AND DBM_ratings.user_id = '" . $_GET["user_id"] ."';";
+$sql = "SELECT rating_id, rating, comment, make, model, year FROM DBM_ratings join database_testing WHERE database_testing.car_id = DBM_ratings.car_id AND DBM_ratings.user_id = '" . $_GET["user_id"] ."';";
 $faq = $db_handle->runQuery($sql);
 ?>
 <html>
@@ -27,6 +27,7 @@ $faq = $db_handle->runQuery($sql);
 				<th>Year</th>
 				<th>Rating</th>
         <th>Comment</th>
+        <th>Delete Rating</th>
 			  </tr>
 		  </thead>
 		  <tbody>
@@ -39,6 +40,7 @@ $faq = $db_handle->runQuery($sql);
 				<td><?php echo $faq[$k]["year"]; ?></td>
 				<td><?php echo $faq[$k]["rating"]; ?></td>
         <td><?php echo $faq[$k]["comment"]; ?></td>
+        <td><button onclick="deleteRating(<?php echo $faq[$k]["rating_id"]; ?>);">Delete This Rating</button></td>
       </tr>
 		<?php
 		}
