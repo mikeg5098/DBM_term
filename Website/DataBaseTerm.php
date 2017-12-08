@@ -469,7 +469,7 @@ if (!$er) {
                   <div class="form-group">
 										<h5>Enter a rating and a operator to search by. You do not have to enter a make.</h2>
                     <input type="text" placeholder="Enter Make" id="searchmake" class="form-control"/>
-										Where:
+										Where rating:
 										<select id="advsearch">
 											<option>
 												=
