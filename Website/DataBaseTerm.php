@@ -108,7 +108,7 @@ $faq = $db_handle->runQuery($sql);
 			var advoperator2 = advoperator1.options[advoperator1.selectedIndex].text;
 			//alert("test5");
 			var advrating1 = document.getElementById("advrating").value;
-			alert("make: " + advmake + ", operator: " + advoperator2+ ", rating: " + advrating1);
+			//alert("make: " + advmake + ", operator: " + advoperator2+ ", rating: " + advrating1);
 			if(advrating1 != ""){
 				var xmr = new XMLHttpRequest();
 				xmr.onreadystatechange = function() {

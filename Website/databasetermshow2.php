@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ERROR);
 include('session.php');
 require_once("dbcontroller.php");
 $db_handle = new DBController();
@@ -32,6 +33,10 @@ $faq = $db_handle->runQuery($sql);
 		  </thead>
 		  <tbody>
 		  <?php
+      if(!$faq){
+        print "<td>You have not rated any cars. </td>";
+      }
+      else{
 		  foreach($faq as $k=>$v) {
 		  ?>
 			  <tr>
@@ -40,6 +45,6 @@ $faq = $db_handle->runQuery($sql);
 				<td style="text-align:center;"><?php echo $faq[$k]["Year"]; ?></td>
         <td style="text-align:center;"><?php echo $faq[$k]["rating"]; ?></td>
 			  </tr>
-      <?php } ?>
+      <?php }} ?>
     </body>
 </html>
