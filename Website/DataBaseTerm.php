@@ -6,15 +6,15 @@ require_once("dbcontroller.php");
 $db_handle = new DBController();
 $sql = "SELECT * from database_testing";
 $faq = $db_handle->runQuery($sql);
-?>	
+?>
 
 <script>
 		function showEdit(editableObj) {
 			$(editableObj).css("background","#FFF");
-		} 
-		
+		}
+
 		function saveToDatabase(editableObj,column,id) {
-		
+
 			$(editableObj).css("background","#FFF url(loaderIcon.gif) no-repeat right");
 			$.ajax({
 				url: "saveedit.php",
@@ -22,10 +22,10 @@ $faq = $db_handle->runQuery($sql);
 				data:'column='+column+'&editval='+editableObj.innerHTML+'&car_id='+id,
 				success: function(data){
 					$(editableObj).css("background","#FDFDFD");
-				}        
+				}
 		   });
 		}
-		
+
 		function deleteRecord(id) {
 			$.ajax({
 				url: "deleterecord.php",
@@ -33,37 +33,37 @@ $faq = $db_handle->runQuery($sql);
 				data:'car_id='+id,
 				success: function(data){
 				displayTable();
-				document.getElementById("seaarchparam").innerHTML = "";
+				//document.getElementById("seaarchparam").innerHTML = "";
 				document.getElementById("inputbox").value = "";
-				}        
+				}
 		   });
 		}
-		
-		
-		
-		
+
+
+
+
 		function insertRecord(){
 		var make = document.getElementById("inputmake").value;
 		var model = document.getElementById("inputmodel").value;
 		var year = document.getElementById("inputyear").value;
 		clearinput();
 		if(make != "" && model != "" && year !=""){
-		
+
 		$.ajax({
 				url: "insertrecord.php",
 				type: "POST",
 				data:'model='+model+'&make='+make+'&year='+year,
 				success: function(data){
 				displayTable();
-				}        
+				}
 		   });
-		   
+
 		   }
 		   else{
 				alert("All Fields must be filled out.");
 		   }
 		}
-		
+
 		function clearinput(){
 			document.getElementById("inputmodel").value = "";
 			document.getElementById("inputyear").value = "";
@@ -89,20 +89,20 @@ $faq = $db_handle->runQuery($sql);
 				for(var i=0;i<ele.length;i++)
 					ele[i].checked = false;
 				displayTable();
-				}        
+				}
 		   });
 
-			
+
 		}
 
 		function setRatingID(car_id){
 			//alert("Test1: " + car_id);
 			document.getElementById("rating_car_id").value = car_id;
 		}
-		
+
 	</script>
-	
-	
+
+
 
 <html style="background-color: #e8e8e8">
 <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
@@ -123,8 +123,8 @@ $faq = $db_handle->runQuery($sql);
         <title>DriverSide</title>
         <link rel="stylesheet" href="style.css" type="text/css" />
     </head>
-    
-    
+
+
     <div id="header">
         <div class="container">
             <ul id="header-nav">
@@ -135,11 +135,11 @@ $faq = $db_handle->runQuery($sql);
             </ul>
             <div id="boxnav"></div>
 			<div style="float:right; color:white;">Welcome: <?php echo $fname_session; ?> &nbsp;&nbsp; <b id="logout"><a href="logout.php">Log Out</a></b>
-        
-        
+
+
         </div>
-    
-    
+
+
     </div>
 
 <body>
@@ -148,28 +148,28 @@ $faq = $db_handle->runQuery($sql);
 <!--Input section-->
     <br />
 	<div style="text-align:center;">
-	
-	
-  <input type="button" name="button" value="Search Car Database" onclick="searchTable()" class="btn btn-primary btn-lg"> 
+
+
+  <!-- <input type="button" name="button" value="Search Car Database" onclick="searchTable()" class="btn btn-primary btn-lg"> -->
 <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModalNorm" style="display:inline;">
     Insert Car
-</button> 
+</button>
 <button class="btn btn-primary btn-lg" onclick="displayTable();">Show All Cars</button>
 
 <br/></br>
 
 <div class="input-group" id="searchbox">
 		<span class="input-group-addon" style="text-align:center;">Search:</span>
-			<input type="text" name="inputbox" id="inputbox" value="" class="form-control"/>
+			<input onkeyup="searchTable()" type="text" name="inputbox" id="inputbox" value="" class="form-control"/>
 	</div>
 
- 
-</div>
- 
-    </div>    
-	
 
-    
+</div>
+
+    </div>
+
+
+
 <!-- Can't move this into external file. Ajax call and defining. -->
 <script>
 function displayTable(){
@@ -177,7 +177,7 @@ function displayTable(){
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
     document.getElementById('databaseout').innerHTML = this.responseText;
-	document.getElementById("seaarchparam").innerHTML = "";
+	//document.getElementById("seaarchparam").innerHTML = "";
   }
   }
   xmlhttp.open("GET","databasetermshow.php",true);
@@ -195,26 +195,27 @@ function searchTable(form){
     xmr.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
       document.getElementById('databaseout').innerHTML = this.responseText;
-	  document.getElementById("seaarchparam").innerHTML = "Showing results for: " + maketosearch;
-	  document.getElementById("inputbox").value = "";
+	  //document.getElementById("seaarchparam").innerHTML = "Showing results for: " + maketosearch;
+	  //document.getElementById("inputbox").value = "";
     }
     }
     xmr.open("GET","databasesearch.php?search=" + maketosearch,true);
     xmr.send();
   }
   else{
-  document.getElementById("seaarchparam").innerHTML = "";
-  document.getElementById("inputbox").value = "";
+  //document.getElementById("seaarchparam").innerHTML = "";
+  //document.getElementById("inputbox").value = "";
   displayTable();
-  }  
   }
-  
+  }
+
   function viewComments(id) {
+		//alert("The id is: " + id);
 			var xmlhttp = new XMLHttpRequest();
 			  xmlhttp.onreadystatechange = function() {
 				if (this.readyState == 4 && this.status == 200) {
 				document.getElementById('databaseout').innerHTML = this.responseText;
-				document.getElementById("seaarchparam").innerHTML = "";
+				//document.getElementById("seaarchparam").innerHTML = "";
 			  }
 			  }
 			  xmlhttp.open("GET","commentsshow.php?search="+id,true);
@@ -315,19 +316,19 @@ if (!$er) {
   }
 ?>
         </p>
-		
+
 		<div id="testing1"></div>
-		
+
 <!-- Button trigger modal -->
 
 <!-- Modal -->
-<div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog" 
+<div class="modal fade" id="myModalNorm" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <button type="button" class="close" 
+                <button type="button" class="close"
                    data-dismiss="modal" onclick="clearinput()">
                        <span aria-hidden="true">&times;</span>
                        <span class="sr-only">Close</span>
@@ -336,7 +337,7 @@ if (!$er) {
                     Insert Car Information
                 </h4>
             </div>
-            
+
             <!-- Modal Body -->
             <div class="modal-body">
                   <div class="form-group">
@@ -359,20 +360,20 @@ if (!$er) {
                        <span aria-hidden="true">Submit</span>
                        <span class="sr-only">Submit</span>
                 </button>
-                
-                
+
+
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="ModalRating" tabindex="-1" role="dialog" 
+<div class="modal fade" id="ModalRating" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
-                <button type="button" class="close" 
+                <button type="button" class="close"
                    data-dismiss="modal" onclick="clearinput()">
                        <span aria-hidden="true">&times;</span>
                        <span class="sr-only">Close</span>
@@ -381,15 +382,17 @@ if (!$er) {
                     Insert Car Information
                 </h4>
             </div>
-            
+
             <!-- Modal Body -->
             <div class="modal-body">
                   <div class="form-group">
                     <label for="inputModel">Would you reccomend this car?</label>
-                      <input type="radio" 
-                      id="inputrating" name="rating" value="1"/> Yes
-					  <input type="radio"
-                      id="inputrating" name="rating" value="-1"/> No
+                      <input type="radio" id="inputrating" name="rating" value="1"/> 1 Star
+					  					<input type="radio" id="inputrating" name="rating" value="2"/> 2 Stars
+											<input type="radio" id="inputrating" name="rating" value="3"/> 3 Stars
+											<input type="radio" id="inputrating" name="rating" value="4"/> 4 Stars
+											<input type="radio" id="inputrating" name="rating" value="5"/> 5 Stars
+
 					  <br>
 					  <textarea rows="4" cols="50" id="rating_comment" placeholder="Place any comments here"></textarea>
 					  <input type="text" style="display:none;" id="rating_car_id">
@@ -399,8 +402,8 @@ if (!$er) {
                        <span aria-hidden="true">Submit</span>
                        <span class="sr-only">Submit</span>
                 </button>
-                
-                
+
+
             </div>
         </div>
     </div>
@@ -411,14 +414,14 @@ if (!$er) {
        <div id="test">
     </div>
   </body>
-  
+
  	<script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.getElementById("myTable2");
   switching = true;
   // Set the sorting direction to ascending:
-  dir = "asc"; 
+  dir = "asc";
   /* Make a loop that will continue until
   no switching has been done: */
   while (switching) {
@@ -456,7 +459,7 @@ function sortTable(n) {
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
       switching = true;
       // Each time a switch is done, increase this count by 1:
-      switchcount ++; 
+      switchcount ++;
     } else {
       /* If no switching has been done AND the direction is "asc",
       set the direction to "desc" and run the while loop again. */
@@ -467,6 +470,6 @@ function sortTable(n) {
     }
   }
 }
-</script> 
+</script>
 
 </html>
