@@ -168,7 +168,11 @@ $faq = $db_handle->runQuery($sql);
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="DataBaseTerm.php">DATABASE</a></li>
                 <li><a href="team.html">TEAM</a></li>
-                <li><a href="login_index.php">LOGIN</a></li>
+                <li><a href="profile.php">LOGIN</a></li>
+								<?php if($id_session == 1 OR $id_session == 2 OR $id_session == 3){
+									echo "<li><a href=\"admin.php\">ADMIN</a></li>";
+								}
+								?>
             </ul>
             <div id="boxnav"></div>
 			<div style="float:right; color:white;">Welcome: <a href="recommendedcars.php?id=<?php echo $id_session; ?>"><?php echo $fname_session; ?></a> &nbsp;&nbsp; <b id="logout"><a href="logout.php">Log Out</a></b>

@@ -11,8 +11,8 @@ header("location: profile.php");
         <title>DriverSide</title>
         <link rel="stylesheet" href="style.css" type="text/css" />
     </head>
-    
-    
+
+
     <div id="header">
         <div class="container">
             <ul id="header-nav">
@@ -22,11 +22,11 @@ header("location: profile.php");
                 <li><a href="login_index.php">LOGIN</a></li>
             </ul>
             <div id="boxnav"></div>
-        
-        
+
+
         </div>
-    
-    
+
+
     </div>
 <body id="body">
     <div id="container">
@@ -34,16 +34,16 @@ header("location: profile.php");
         <div class="page">
         <div id="stylebar"></div>
 
-            
-            
-            
+
+
+
             <div class="display_area">
                 <div id="login_area">
                 <div class="login">
                     <h1>DriverSide Login</h1>
                     <div class="sep_bar"></div>
-            
-                    
+
+
                     <form action="" method="post">
                         <label>UserName :</label>
                         <input id="name" name="username" placeholder="username" type="text"><br><br>
@@ -54,22 +54,22 @@ header("location: profile.php");
                         <span><?php echo $error; ?></span>
                     </form>
                 </div>
-                    
-                    
-                    
-                    
+
+
+
+
                 <div style="float: right;" class="login">
                     <h1>Register Now</h1>
                     <div class="sep_bar"></div>
-                    
-                    
+
+
                     <form action="" method="post">
                         <label>First Name :</label>
                         <input id="fname" name="fname" placeholder="First Name" type="text"><br><br>
-                        
+
                         <label>Last Name :</label>
                         <input id="lname" name="lname" placeholder="Last Name" type="text"><br><br>
-                        
+
                         <label>UserName :</label>
                         <input id="name" name="username" placeholder="username" type="text"><br><br>
                         <label>Password :</label>
@@ -78,8 +78,8 @@ header("location: profile.php");
                         <input name="register" type="submit" value=" Register ">
                         <span><?php echo $error; ?></span>
                     </form>
-                
-                
+
+
                 </div>
                 </div>
             </div>

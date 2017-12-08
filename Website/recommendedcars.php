@@ -170,6 +170,10 @@ $user_id = $_GET["id"];
                 <li><a href="DataBaseTerm.php">DATABASE</a></li>
                 <li><a href="team.html">TEAM</a></li>
                 <li><a href="login_index.php">LOGIN</a></li>
+								<?php if($id_session == 1 OR $id_session == 2 OR $id_session == 3){
+									echo "<li><a href=\"admin.php\">ADMIN</a></li>";
+								}
+								?>
             </ul>
             <div id="boxnav"></div>
 			<div style="float:right; color:white;">Welcome: <?php echo $fname_session; ?> &nbsp;&nbsp; <b id="logout"><a href="logout.php">Log Out</a></b>
@@ -275,7 +279,7 @@ function searchTable(form){
         <button class="btn btn-primary btn-lg" onclick="reccomendedCarsShow();" style="text-align:center;">Show Reccomended Cars</button>
         <button class="btn btn-primary btn-lg" onclick="displayTable2();" style="text-align:center;">Show Your Rated Cars</button>
 
-        
+
       </div>
         <div id="databaseout"></div>
        <div id="test">
