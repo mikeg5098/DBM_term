@@ -4,7 +4,7 @@ include('session.php');
 require_once("dbcontroller.php");
 $db_handle = new DBController();
 $search = $_GET["search"];
-$sql = "SELECT database_testing.car_id, Model, Make, Year, rating_car FROM database_testing join (SELECT car_id, SUM(rating) as rating_car FROM DBM_ratings GROUP BY car_id) AS rating_table WHERE database_testing.car_id = rating_table.car_id AND (model LIKE '%" . $search . "%' OR make LIKE '%" . $search . "%' OR year LIKE '%" . $search . "%') ORDER BY model ;";
+$sql = "SELECT database_testing.car_id, ROUND(rating_car, 0) as rating_car, Make, Model, Year FROM (SELECT car_id, AVG(rating) as rating_car FROM DBM_ratings WHERE rating !='0' GROUP BY car_id UNION SELECT car_id, AVG(rating) as rating_car FROM DBM_ratings WHERE rating ='0' AND DBM_ratings.car_id not in (SELECT car_id FROM DBM_ratings WHERE rating !='0') GROUP BY car_id) as dbm3 join database_testing WHERE dbm3.car_id = database_testing.car_id AND (make LIKE '%" . $search . "%' OR model LIKE '%" . $search ."%' OR year LIKE '%" . $search . "%');";
 $faq = $db_handle->runQuery($sql);
 ?>
 <html>
@@ -17,8 +17,8 @@ $faq = $db_handle->runQuery($sql);
 		<script>
 		function showEdit(editableObj) {
 			$(editableObj).css("background","#FFF");
-		} 
-		
+		}
+
 		function saveToDatabase(editableObj,column,id) {
 			$(editableObj).css("background","#FFF url(loaderIcon.gif) no-repeat right");
 			$.ajax({
@@ -27,15 +27,15 @@ $faq = $db_handle->runQuery($sql);
 				data:'column='+column+'&editval='+editableObj.innerHTML+'&car_id='+id,
 				success: function(data){
 					$(editableObj).css("background","#FDFDFD");
-				}        
+				}
 		   });
 		}
 		</script>
     </head>
-    <body>		
-	  <?php 
+    <body>
+	  <?php
 		if($id_session == 1 or $id_session == 2 or $id_session == 3)
-		{ 
+		{
 		?>
 	   <table id="myTable2" class="table table-hover">
 		  <thead>

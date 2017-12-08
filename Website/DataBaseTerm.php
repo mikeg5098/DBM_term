@@ -100,6 +100,40 @@ $faq = $db_handle->runQuery($sql);
 			document.getElementById("rating_car_id").value = car_id;
 		}
 
+		function advancedSearch(){
+			var advmake = document.getElementById('searchmake').value;
+			//alert("test3");
+			var advoperator1 = document.getElementById("advsearch");
+			//alert("test4");
+			var advoperator2 = advoperator1.options[advoperator1.selectedIndex].text;
+			//alert("test5");
+			var advrating1 = document.getElementById("advrating").value;
+			alert("make: " + advmake + ", operator: " + advoperator2+ ", rating: " + advrating1);
+			if(advrating1 != ""){
+				var xmr = new XMLHttpRequest();
+				xmr.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+					document.getElementById('databaseout').innerHTML = this.responseText;
+				//document.getElementById("seaarchparam").innerHTML = "Showing results for: " + maketosearch;
+				//document.getElementById("inputbox").value = "";
+				}
+				}
+				xmr.open("GET","advancedsearch.php?make=" + advmake + "&operator=" + advoperator2 + "&rating=" + advrating1,true);
+				xmr.send();
+			}
+			else{
+				alert("You cannot search with no rating");
+				displayTable();
+			}
+
+
+
+			//Reset Modal Fields
+			document.getElementById('searchmake').value = "";
+			document.getElementById("advrating").value = "";
+			advoperator1.selectedIndex = 0;
+		}
+
 	</script>
 
 
@@ -115,6 +149,9 @@ $faq = $db_handle->runQuery($sql);
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Five star input css -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
 
 
 
@@ -155,6 +192,7 @@ $faq = $db_handle->runQuery($sql);
     Insert Car
 </button>
 <button class="btn btn-primary btn-lg" onclick="displayTable();">Show All Cars</button>
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modalsearch" style="display:inline;">Advanced Search</button>
 
 <br/></br>
 
@@ -162,6 +200,7 @@ $faq = $db_handle->runQuery($sql);
 		<span class="input-group-addon" style="text-align:center;">Search:</span>
 			<input onkeyup="searchTable()" type="text" name="inputbox" id="inputbox" value="" class="form-control"/>
 	</div>
+
 
 
 </div>
@@ -177,7 +216,7 @@ function displayTable(){
   xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
     document.getElementById('databaseout').innerHTML = this.responseText;
-	//document.getElementById("seaarchparam").innerHTML = "";
+	document.getElementById("inputbox").value = "";
   }
   }
   xmlhttp.open("GET","databasetermshow.php",true);
@@ -408,6 +447,62 @@ if (!$er) {
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modalsearch" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close"
+                   data-dismiss="modal" onclick="clearinput()">
+                       <span aria-hidden="true">&times;</span>
+                       <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Insert Car Information
+                </h4>
+            </div>
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                  <div class="form-group">
+										<h5>Enter a rating and a operator to search by. You do not have to enter a make.</h2>
+                    <input type="text" placeholder="Enter Make" id="searchmake" class="form-control"/>
+										Where:
+										<select id="advsearch">
+											<option>
+												=
+											</option>
+											<option>
+												<
+											</option>
+											<option>
+												>
+											</option>
+											<option>
+												<=
+											</option>
+											<option>
+												>=
+											</option>
+										</select>
+										<input type="text" maxlength="4" id="advrating" style="width:40px; height:20px;"/>
+
+					  <br>
+                  </div>
+				  <button type="submit" class="btn btn-default"
+                   data-dismiss="modal" onclick="advancedSearch()">
+                       <span aria-hidden="true">Submit</span>
+                       <span class="sr-only">Submit</span>
+                </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
 		<div id="seaarchparam" style="color:red; text-align:center; font-size:16px;"></div>
         <div id="databaseout"></div>
