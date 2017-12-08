@@ -36,7 +36,15 @@ $faq = $db_handle->runQuery($sql);
 	         <td><?php echo $faq[$k]["username"]; ?></td>
            <td><?php echo $faq[$k]["fname"]; ?></td>
 		       <td><?php echo $faq[$k]["lname"]; ?></td>
-           <td style="text-align:left; width:450px;"><button onclick="deleteAccount(<?php echo $faq[$k]["id"]; ?>);">Delete Account</button><button onclick="viewUserRatings(<?php echo $faq[$k]["id"]; ?>);">See Ratings</button><button data-toggle="modal" data-target="#modalpassword" onclick="setUserID(<?php echo $faq[$k]["id"]; ?>);">Change Password</button></td>
+           <td style="text-align:left; width:450px;">
+             <?php
+           if ($faq[$k]["id"] != 1 AND $faq[$k]["id"] != 2 AND $faq[$k]["id"] != 3){ echo "<button onclick=\"deleteAccount(" . $faq[$k]["id"] . ");\">Delete Account</button>";}
+             ?>
+             <button onclick="viewUserRatings(<?php echo $faq[$k]["id"]; ?>);">See Ratings</button>
+             <?php
+           if ($faq[$k]["id"] != 1 AND $faq[$k]["id"] != 2 AND $faq[$k]["id"] != 3){ echo "<button data-toggle=\"modal\" data-target=\"#modalpassword\" onclick=\"setUserID(" . $faq[$k]["id"] .  ");\">Change Password</button>";}
+             ?>
+             </td>
 			  </tr>
 		<?php
 		}

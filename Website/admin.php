@@ -214,7 +214,7 @@ $faq = $db_handle->runQuery($sql);
       xmr.send();
     }
 
-  
+
 
   getUsers();
 </script>
@@ -240,7 +240,7 @@ $faq = $db_handle->runQuery($sql);
                   <div class="form-group">
                     New Password:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="password" id="password1" /><br />
                     Confirm Password:<input type="password" id="password2" /><br />
-                    <input type="text"  id="user_id">
+                    <input type="text" style="display:none;" id="user_id">
                   </div>
 				  <button type="submit" class="btn btn-default"
                    data-dismiss="modal" onclick="changePassword()">

@@ -34,9 +34,9 @@ $faq = $db_handle->runQuery($sql);
 		  foreach($faq as $k=>$v) {
 		  ?>
 			  <tr>
-				<td><?php echo $faq[$k]["Model"]; ?></td>
-				<td><?php echo $faq[$k]["Make"]; ?></td>
-				<td><?php echo $faq[$k]["Year"]; ?></td>
+				<td><?php echo $faq[$k]["model"]; ?></td>
+				<td><?php echo $faq[$k]["make"]; ?></td>
+				<td><?php echo $faq[$k]["year"]; ?></td>
 				<td><?php echo $faq[$k]["rating"]; ?></td>
         <td><?php echo $faq[$k]["comment"]; ?></td>
       </tr>
